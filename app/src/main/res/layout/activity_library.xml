@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.appocalypse.BookViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/library_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:onClick="@{()-> vm.onBookListenerLibrary.onBookClick(vm.book.id)}">
+
+                <TextView
+                    android:id="@+id/readingNowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/headers"
+                    android:text="@string/reading_now_text"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <RelativeLayout
+                    android:id="@+id/bookBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/readingNowText"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/currentBookCover"
+                        android:layout_width="98dp"
+                        android:layout_height="156dp"
+                        android:layout_marginLeft="15dp"
+                        android:contentDescription="@string/book_cover"
+                        android:visibility="@{vm.book.image_url == null ? View.GONE : View.VISIBLE}"
+                        app:imageUrl="@{vm.book.image_url}" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/currentBookCover"
+                        android:layout_margin="7dp"
+                        android:layout_toEndOf="@id/currentBookCover"
+                        android:fontFamily="@font/standard_font"
+                        android:text="@{vm.book.title == null ? @string/not_reading : vm.book.title}"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/writtenBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/written_by"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        android:visibility="@{vm.book.title == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/writtenBy"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toEndOf="@id/currentBookCover"
+                        android:fontFamily="@font/standard_font"
+                        android:text="@{vm.book.author.name}"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@android:color/black"
+                        android:textSize="27sp"
+                        android:textStyle="italic"
+                        android:visibility="@{vm.isReading ? View.GONE : View.VISIBLE}" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/planningToReadText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bookBox"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/headers"
+                    android:text="@string/books_you_re_planning_to_read"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/plannedRecycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/planningToReadText"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:clickHandler="@{vm.onBookListenerLibrary}"
+                    app:data="@{vm.plannedBooks}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/completedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/plannedRecycler"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/headers"
+                    android:text="@string/completed"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/completedRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/completedText"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:clickHandler="@{vm.onBookListenerLibrary}"
+                    app:data="@{vm.completedBooks}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,181 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.appocalypse.BookViewModel" />
+
+
+        <import type="java.time.LocalDate" />
+
+        <import type="java.time.temporal.ChronoUnit" />
+    </data>
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/myBook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            tools:context=".selectedBookFrag">
+
+            <ImageView
+                android:id="@+id/mBookCover"
+                android:layout_width="98dp"
+                android:layout_height="156dp"
+                android:layout_margin="15dp"
+                android:contentDescription="@string/book_cover"
+                app:imageUrl="@{vm.book.image_url}" />
+
+            <TextView
+                android:id="@+id/mTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/mBookCover"
+                android:layout_margin="7dp"
+                android:layout_toEndOf="@id/mBookCover"
+                android:fontFamily="@font/standard_font"
+                android:text="@{vm.book.title}"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/writtenBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mTitle"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/standard_font"
+                android:text="@string/written_by"
+                android:textSize="23sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/mAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/writtenBy"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/standard_font"
+                android:text="@{vm.book.author.name}"
+                android:textColor="@android:color/black"
+                android:textSize="27sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/timeSpentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mBookCover"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/headers"
+                android:text="@string/time_spent_on_this_book"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/timeSpent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/timeSpentText"
+                android:layout_marginLeft="15sp"
+                android:textColor="@color/text"
+                android:textSize="20sp"
+                app:setEnd="@{vm.book.endDate}"
+                app:setStart="@{vm.book.startDate}" />
+
+            <TextView
+                android:id="@+id/startDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/timeSpent"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/headers"
+                android:text="@string/start_date"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/startDateText"
+                android:layout_marginLeft="15sp"
+                android:text="@{vm.book.startDate == null ? @string/not_started : vm.book.startDate}"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/endDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/startDate"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/headers"
+                android:text="@string/finish_date"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/endDateText"
+                android:layout_marginLeft="15sp"
+                android:text="@{vm.book.endDate == null ? @string/not_finished : vm.book.endDate}"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="50dp"
+                android:id="@+id/firstBtn"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/endDate"
+                android:layout_marginBottom="15dp"
+                android:background="@color/button"
+                android:onClick="@{vm.book.status.equals(`Completed`) ? vm.start : vm.complete}"
+                android:text="@{vm.book.status.equals(`Completed`) ? @string/reread : @string/mark_book_as_completed }"
+                android:textAllCaps="false"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/secondBtn"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/firstBtn"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="15dp"
+                android:background="@color/button"
+                android:onClick="@{vm.book.status.equals(`Planning`) ? vm.start : vm.put_off}"
+                android:text="@{vm.book.status.equals(`Completed`) ? @string/plan_rereading : vm.book.status.equals(`Planning`) ? @string/start_reading : @string/put_off_book}"
+                android:textAllCaps="false"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:background="@color/delete"
+                android:layout_below="@id/secondBtn"
+                android:onClick="@{vm.deleteBookListener}"
+                android:text="@string/delete_book"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="21sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>

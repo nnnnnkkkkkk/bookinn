@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.example.appocalypse.FoundBookViewModel" />
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/selectedBook"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".selectedBookFrag">
+
+        <TextView
+            android:id="@+id/youSelectedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:fontFamily="@font/headers"
+            android:text="@string/selected_this_book"
+            android:textColor="@color/text"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/selectedBookBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/selectedBookCover"
+                android:layout_width="98dp"
+                android:layout_height="156dp"
+                android:layout_margin="15dp"
+                app:imageUrl="@{vm.thisBook.image_url}"
+                android:contentDescription="@string/book_cover" />
+
+            <TextView
+                android:id="@+id/selectedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/selectedBookCover"
+                android:layout_margin="7dp"
+                android:layout_toEndOf="@id/selectedBookCover"
+                android:fontFamily="@font/standard_font"
+                android:text="@{vm.thisBook.title}"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/writtenBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectedTitle"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/standard_font"
+                android:text="@string/written_by"
+                android:textSize="23sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/selectedAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/writtenBy"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/selectedBookCover"
+                android:fontFamily="@font/standard_font"
+                android:text="@{vm.thisBook.author.name}"
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/black"
+                android:textSize="27sp"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@color/button"
+            android:text="@string/add_to_my_books"
+            android:textAllCaps="false"
+            android:textSize="21sp"
+            android:onClick="@{vm.add}"/>
+    </LinearLayout>
+</layout>

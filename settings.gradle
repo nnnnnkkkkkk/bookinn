@@ -1,0 +1,2 @@
+rootProject.name='appocalypse'
+include ':app'

@@ -1,0 +1,48 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="PlannedBookBinding">
+
+        <variable
+            name="planned_book"
+            type="com.example.appocalypse.Books" />
+        <variable
+            name="pos"
+            type="int" />
+        <variable
+            name="onBookClickListener"
+            type="com.example.appocalypse.MyBooksAdapter.OnBookListener" />
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="160dp"
+        android:layout_height="240dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/plannedBookBox"
+        android:onClick="@{()->onBookClickListener.onBookClick(planned_book.id)}"
+        >
+
+        <ImageView
+            android:id="@+id/mBookCover"
+            android:layout_width="98dp"
+            android:layout_height="156dp"
+            android:layout_marginTop="5dp"
+            app:imageUrl = "@{planned_book.image_url}"/>
+
+        <TextView
+            android:id="@+id/mTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:text="@{planned_book.title}"/>
+
+    </LinearLayout>
+
+</layout>

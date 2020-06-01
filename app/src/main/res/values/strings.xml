@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">BookInn</string>
+    <string name="reading_now_text">Current book</string>
+    <string name="written_by">written by</string>
+    <string name="book_cover">cover_content_description</string>
+    <string name="search">Search</string>
+    <string name="books_you_re_planning_to_read">Reading list</string>
+    <string name="found_books">Found books</string>
+    <string name="by">by</string>
+
+    <string name="selected_this_book">You were looking for this?</string>
+    <string name="add_to_my_books">Add to my books</string>
+    <string name="search_for_new_books">Search for new books</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mark_book_as_completed">Mark book as completed</string>
+    <string name="put_off_book">Put off book</string>
+    <string name="start_reading">Start reading it</string>
+    <string name="open_notes">Open notes</string>
+    <string name="delete_book">Delete book</string>
+    <string name="reread">Read it again</string>
+    <string name="plan_rereading">Planning to reread</string>
+    <string name="removes">This book has been removed from your books</string>
+    <string name="not_started">You has not started it yet </string>
+    <string name="not_finished">You has not finished it yet</string>
+
+    <string name="not_reading">You are not reading anything at the moment. Start doing it right now!</string>
+    <string name="write_notes_on_the_book">Write notes on the book</string>
+    <string name="time_spent_on_this_book">Days spent on this book:</string>
+    <string name="start_date">Start date:</string>
+    <string name="finish_date">Finish date</string>
+
+    // диалог
+    <string name="delete_this">Delete this book?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="profile">Profile</string>
+
+    <string name="completed">Completed books</string>
+</resources>

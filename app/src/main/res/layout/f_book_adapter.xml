@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="found_book"
+            type="com.example.appocalypse.Books" />
+
+        <variable
+            name="onBookClick"
+            type="com.example.appocalypse.foundBookAdapter.OnItemClickListener" />
+        <variable
+            name="pos"
+            type="int" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:onClick="@{()->onBookClick.onItemClick(pos)}">
+
+        <ImageView
+            android:id="@+id/fBookCover"
+            android:layout_width="98dp"
+            android:layout_height="156dp"
+            android:layout_marginTop="10dp"
+            app:imageUrl="@{found_book.image_url}"/>
+
+        <TextView
+            android:id="@+id/fTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{found_book.title}"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="21sp" />
+
+        <TextView
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/by"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/fAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{found_book.author.name}"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+</layout>
